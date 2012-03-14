@@ -70,7 +70,7 @@ echo
 ERROR="no"
 while read i
 do
-    if [ "$i" == "" -o  "${i:0:1}" == "#" -o "`echo $i | wc -w`" != "1" ]
+    if [ "$i" == "" -o  "${i:0:1}" == "#" -o "`echo $i | wc -w | tr -d ' '`" != "1" ]
     then
         continue
     fi
