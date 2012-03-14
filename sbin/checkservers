@@ -52,6 +52,7 @@ esac
 # Not to send message when in interactive shell or previously
 # erroneous state.
 SENDSMS="yes"
+SENDMAIL="yes"
 if [ "$INTERACTIVE" == "yes" ]
 then
     echo "Interactive shell. Not sending SMS."
@@ -93,6 +94,15 @@ do
 		else
 			echo "No SMS sent."
 		fi
+
+		if [ "$SENDMAIL" == "yes" -a "$ERROR" == "no" ]
+		then
+			echo "Error with website $i" | $MAIL -s "Error with website $i" $MAIL_RECIPIENTS
+			echo "mail sent" >&2
+		else
+			echo "No mail sent."
+		fi
+			
         ERROR="yes"
 	fi
 done < $URLFILE
